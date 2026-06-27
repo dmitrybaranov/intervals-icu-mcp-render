@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: ii-mcp-976f620d          # randomized so the subdomain isn't guessable
+    runtime: docker
+    plan: free                     # free spins down after ~15 min idle (cold starts); use "starter" to stay warm
+    # No healthCheckPath: it would have to hardcode the secret path. Render
+    # falls back to checking the port is open, which is fine here.
+    envVars:
+      - key: INTERVALS_ICU_API_KEY
+        sync: false                # set real values in the Render dashboard, never in git
+      - key: INTERVALS_ICU_ATHLETE_ID
+        sync: false
+      - key: MCP_PATH
+        sync: false                # the secret path, e.g. mcp-77266abd8ba508d440393029
